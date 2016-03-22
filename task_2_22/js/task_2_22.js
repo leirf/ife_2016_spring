@@ -6,6 +6,7 @@ window.onload = function(){
 	//为前序遍历按钮绑定事件
 	document.getElementById("preOrder").onclick = function(){
 		//环境初始化
+		styleReset();
 		clearInterval(timer);
 		result = [];
 
@@ -15,6 +16,7 @@ window.onload = function(){
 	//为中序遍历按钮绑定事件
 	document.getElementById("midOrder").onclick = function(){
 		//环境初始化
+		styleReset();
 		clearInterval(timer);
 		result = [];
 
@@ -24,6 +26,7 @@ window.onload = function(){
 	//为后序遍历按钮绑定事件
 	document.getElementById("postOrder").onclick = function(){
 		//环境初始化
+		styleReset();
 		clearInterval(timer);
 		result = [];
 
@@ -50,11 +53,11 @@ function preOrder(node){
 
 function inOrder(node){
 	if(node.firstElementChild !== null){
-		preOrder(node.firstElementChild);
+		inOrder(node.firstElementChild);
 	}
 	result.push(node);
 	if(node.lastElementChild !== null){
-		preOrder(node.lastElementChild);
+		inOrder(node.lastElementChild);
 	}
 }
 /*
@@ -63,10 +66,10 @@ function inOrder(node){
 
 function postOrder(node){
 	if(node.firstElementChild !== null){
-		preOrder(node.firstElementChild);
+		postOrder(node.firstElementChild);
 	}
 	if(node.lastElementChild !== null){
-		preOrder(node.lastElementChild);
+		postOrder(node.lastElementChild);
 	}
 	result.push(node);
 }
@@ -84,4 +87,11 @@ function startAnimate(){
 			result[result.length-1].style.backgroundColor = '#fff';
 		}
 	}, 1000)
+}
+//样式初始化函数
+function styleReset(){
+	var divEles = document.getElementsByTagName("div");
+	for(var i=0; i<divEles.length;i++){
+		divEles[i].style.backgroundColor = '#fff';
+	}
 }
